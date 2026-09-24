@@ -1,0 +1,51 @@
+/* styles.css */
+
+.container {
+  display: grid;
+  /* Defines the layout using named areas */
+  grid-template-areas:
+    "header header"
+    "main   sidebar"
+    "footer footer";
+  /* Defines two columns: one flexible (1fr) and one fixed-width (200px) */
+  grid-template-columns: 1fr auto;
+  /* Defines three rows with automatic height based on content */
+  grid-template-rows: auto 1fr auto;
+  /* Adds space between grid items */
+  /* gap: 10px;   
+  width: 100%;
+  height: 100vh;
+  border: 2px solid #ccc; 
+  padding: 10px; */
+}
+
+/* Assigns HTML elements to the named grid areas */
+.header {
+  grid-area: header;
+}
+
+#togglemenu.icon {
+  border: none;
+  cursor: pointer;
+}
+#togglemenu.icon-animate {
+  animation: rotateIcon 0.5s linear;
+}
+@keyframes rotateIcon { 
+  from { transform: rotate(0deg); }
+  to { transform: rotate(180deg); }
+}
+
+.main {
+  grid-area: main;
+}
+
+.container > .sidebar { 
+  grid-area: sidebar;
+  width: fit-content;
+  display: none; /* Hides the sidebar */
+}
+
+.footer {
+  grid-area: footer;
+}

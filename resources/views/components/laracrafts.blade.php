@@ -1,0 +1,1 @@
+<img src="{{ asset('images/laracraftsinkscape.svg') }}" alt="logo" {{ $attributes }} />

@@ -1,0 +1,86 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+
+@plugin "flowbite/plugin";
+@plugin "@tailwindcss/forms";
+
+/*
+ * Tailwind 4 skips git-ignored folders when scanning for classes, so the
+ * places that ship class names outside resources/ are listed explicitly.
+ */
+@source "../../node_modules/flowbite";
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+
+/* ------------------------------------------------------------------
+ * Design tokens
+ * Flowbite 4 ships semantic tokens (brand, heading, body, neutral-*).
+ * Re-pointing them here re-themes every Flowbite component and every
+ * `bg-brand`, `text-heading`, `text-fg-brand` ... class in one place.
+ * ------------------------------------------------------------------ */
+@theme {
+    --font-sans: 'Figtree', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-body: var(--font-sans);
+
+    /* Brand: indigo */
+    --color-brand-softer: var(--color-indigo-50);
+    --color-brand-soft: var(--color-indigo-100);
+    --color-brand-medium: var(--color-indigo-200);
+    --color-brand: var(--color-indigo-600);
+    --color-brand-strong: var(--color-indigo-700);
+    --color-fg-brand-subtle: var(--color-indigo-300);
+    --color-fg-brand: var(--color-indigo-600);
+    --color-fg-brand-strong: var(--color-indigo-800);
+
+    /* Corner radii: Flowbite's defaults (16px `lg`, 8px base) make inputs pill-shaped
+       and checkboxes circular, so they are tightened here. */
+    --radius: 0.375rem;
+    --radius-lg: 0.75rem;
+
+    /* Text */
+    --color-heading: var(--color-slate-900);
+    --color-body: var(--color-slate-600);
+    --color-body-subtle: var(--color-slate-500);
+
+    /* Page surface: a touch cooler than plain gray */
+    --color-neutral-secondary-soft: var(--color-slate-50);
+}
+
+@layer base {
+    /* Tailwind 3 defaulted borders to gray-200; v4 uses currentColor.
+       Keep the old look for every plain `border` in existing views. */
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-default, var(--color-gray-200));
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4 {
+        letter-spacing: -0.01em;
+    }
+}
+
+@layer components {
+    /* Reusable surface. Use it on any new or migrated view. */
+    .card {
+        @apply rounded-lg border border-default bg-white shadow-xs;
+    }
+
+    .card-title {
+        @apply text-base font-semibold text-heading;
+    }
+
+    .kpi-icon {
+        @apply grid size-10 shrink-0 place-items-center rounded-lg bg-brand-softer text-fg-brand;
+    }
+}
